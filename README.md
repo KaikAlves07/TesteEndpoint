@@ -24,7 +24,8 @@
 
 <div class="options-menu" id="optionsMenu">
     <ul>
-        <li class="option" data-action="schedule">📌 Agendar Teste</li>
+        <li class="option" data-action="add">👤 Adicionar Cadastro</li>
+        <li class="option" data-action="schedule">📌 Marcar Agendamento</li>
         <li class="option" data-action="delete">❌ Excluir Cadastro</li>
         <li class="option" data-action="update">🔄 Atualizar Dados</li>
     </ul>
@@ -45,30 +46,31 @@
             <table>
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Nome</th>
                         <th>Status</th>
                         <th>Editado</th>
                         <th>Agendar</th>
-                        <th>Ações</th>
+                       
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Obtendo agendamento de um usuario</td>
+                        <td>3827</td>
                         <td class="status passed">Aprovado</td>
                         <td>há um dia</td>
                         <td>Nenhum</td>
                         <td>...</td>
                     </tr>
                     <tr>
-                        <td>Deletando um Usuário</td>
+                        <td>3827</td>
                         <td class="status failed">Falhou</td>
                         <td>há um dia</td>
                         <td>Nenhum</td>
                         <td>...</td>
                     </tr>
                     <tr>
-                        <td>Adicionando um Usuário</td>
+                        <td>3827</td>
                         <td class="status passed">Aprovado</td>
                         <td>há 2 dias</td>
                         <td>Nenhum</td>
@@ -97,7 +99,8 @@
                 <option>09811-223</option>
 
             </select>
-            <button class="buscar">Buscar agendamento</button>
+            <input type="text" id="searchBox" placeholder="Digite as informações para buscar...">
+            <button id="searchButton">🔍 Buscar Agendamento </button>
             <h2>Resultados Recentes</h2>
             <p class="recent passed">Agenda disponivel para:</p>
             <p class="recent failed">● Deletando um Usuário</p>
@@ -106,6 +109,9 @@
     <script src="script.js"></script>
 </body>
 </html>
+
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -154,20 +160,29 @@ header {
     cursor: pointer; /* Faz a seta do mouse virar uma mão */
     border-radius: 5px;
 }
-.buscar{   
+#searchButton{   
     background-color: #3498db;
     color: white;
     border: none;
     padding: 10px 15px;
     cursor: pointer; /* Faz a seta do mouse virar uma mão */
     border-radius: 5px;
-    margin-top: 20px;
+    width: 100%;
+   
 }
 
 
 .search-box {
     width: 100%;
     padding: 10px;
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#searchBox{
+    width: 100%;
+    padding: 5px;
     margin: 20px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -264,6 +279,8 @@ select, p {
 .input-box button:hover {
     background-color: #217dbb;
 }
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const testButton = document.querySelector(".create-test");
     const optionsMenu = document.getElementById("optionsMenu");
