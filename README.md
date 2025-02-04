@@ -1,5 +1,3 @@
-# TesteEndpoint
-Repositorio criado com intuito de testes de endpoint
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -23,6 +21,23 @@ Repositorio criado com intuito de testes de endpoint
             <header>
                 <h1>Testes de Endpoint</h1>
                 <button class="create-test">+ Criar Teste</button>
+
+<div class="options-menu" id="optionsMenu">
+    <ul>
+        <li class="option" data-action="schedule">📌 Agendar Teste</li>
+        <li class="option" data-action="delete">❌ Excluir Cadastro</li>
+        <li class="option" data-action="update">🔄 Atualizar Dados</li>
+    </ul>
+</div>
+
+<!-- Caixa de entrada (inicialmente oculta) -->
+<div class="input-box" id="inputBox">
+    <label id="inputLabel"></label>
+    <input type="text" id="userInput" placeholder="Digite aqui...">
+    <button id="submitButton">Enviar</button>
+</div>
+
+
             </header>
             
             <input type="text" placeholder="Buscar Testes" class="search-box">
@@ -82,6 +97,7 @@ Repositorio criado com intuito de testes de endpoint
                 <option>09811-223</option>
 
             </select>
+            <button class="buscar">Buscar agendamento</button>
             <h2>Resultados Recentes</h2>
             <p class="recent passed">Agenda disponivel para:</p>
             <p class="recent failed">● Deletando um Usuário</p>
@@ -90,7 +106,6 @@ Repositorio criado com intuito de testes de endpoint
     <script src="script.js"></script>
 </body>
 </html>
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -132,12 +147,23 @@ header {
 }
 
 .create-test {
-    background: #007bff;
+    background-color: #3498db;
     color: white;
-    padding: 10px;
     border: none;
+    padding: 10px 15px;
+    cursor: pointer; /* Faz a seta do mouse virar uma mão */
     border-radius: 5px;
 }
+.buscar{   
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer; /* Faz a seta do mouse virar uma mão */
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
 
 .search-box {
     width: 100%;
@@ -184,3 +210,92 @@ select, p {
     padding: 10px;
     margin-top: 10px;
 }
+.options-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.option {
+    padding: 8px 12px;
+    cursor: pointer;
+    list-style: none;
+}
+
+.option:hover {
+    background-color: #f4f4f4;
+}
+
+/* Estilo da Caixa de Entrada */
+.input-box {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    width: 300px;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input-box button {
+    width: 100%;
+    padding: 8px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.input-box button:hover {
+    background-color: #217dbb;
+}
+document.addEventListener("DOMContentLoaded", function () {
+    const testButton = document.querySelector(".create-test");
+    const optionsMenu = document.getElementById("optionsMenu");
+    const inputBox = document.getElementById("inputBox");
+    const inputLabel = document.getElementById("inputLabel");
+    const userInput = document.getElementById("userInput");
+    
+    // Exibir ou ocultar o menu ao clicar no botão
+    testButton.addEventListener("click", function () {
+        optionsMenu.style.display = optionsMenu.style.display === "block" ? "none" : "block";
+    });
+
+    // Adiciona evento para cada opção
+    document.querySelectorAll(".option").forEach(option => {
+        option.addEventListener("click", function () {
+            const action = this.getAttribute("data-action");
+            optionsMenu.style.display = "none"; // Oculta o menu
+
+            // Define o título e placeholder da caixa de entrada
+            if (action === "schedule") {
+                inputLabel.innerText = "Agendar Teste:";
+                userInput.placeholder = "Digite a data do teste...";
+            } else if (action === "delete") {
+                inputLabel.innerText = "Excluir Cadastro:";
+                userInput.placeholder = "Digite o ID do usuário...";
+            } else if (action === "update") {
+                inputLabel.innerText = "Atualizar Dados:";
+                userInput.placeholder = "Informe os novos dados...";
+            }
+
+            // Exibe a caixa de entrada
+            inputBox.style.display = "block";
+        });
+    });
+});
