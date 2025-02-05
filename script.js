@@ -9,6 +9,8 @@ document.getElementById('sendRequest').addEventListener('click', async () => {
     const responseBox = document.getElementById('responseText');
   
     // Verifica se a chave da API e o endpoint foram preenchidos
+   
+    //caso queira que somente possa ser inserido o endpoint sem a chave da APU necessario excluir !apiKey abaixo
     if (!apiKey || !endpoint) {
       responseBox.textContent = 'Por favor, forneça tanto a chave da API quanto o endpoint.';
       return; // Sai da função se os campos estiverem vazios
