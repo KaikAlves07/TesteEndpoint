@@ -4,25 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Testador de Endpoint de API</title>
+  <!-- Link externo para o arquivo de estilo CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
     <h1>Testador de Endpoint de API</h1>
 
+    <!-- Campo para inserir a chave da API -->
     <label for="apiKey">Chave da API:</label>
     <input type="text" id="apiKey" placeholder="Digite sua chave de API">
 
+    <!-- Campo para inserir o endpoint da requisição -->
     <label for="endpoint">Endpoint:</label>
     <input type="text" id="endpoint" placeholder="Digite o endpoint da API">
 
+    <!-- Botão para enviar a requisição -->
     <button id="sendRequest">Enviar Requisição</button>
 
+    <!-- Área onde será exibida a resposta da requisição -->
     <div id="responseBox" class="response-box">
       <p id="responseText">A resposta será exibida aqui...</p>
     </div>
   </div>
 
+  <!-- Link externo para o arquivo de script JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>

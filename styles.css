@@ -1,3 +1,4 @@
+/* Define o comportamento padrão de margin e padding para todos os elementos */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,6 +6,7 @@
     font-family: Arial, sans-serif;
   }
   
+  /* Define o estilo geral da página */
   body {
     background-color: #f9f9f9;
     display: flex;
@@ -13,6 +15,7 @@
     min-height: 100vh;
   }
   
+  /* Estilo do contêiner principal */
   .container {
     background-color: #ffffff;
     padding: 20px;
@@ -22,18 +25,21 @@
     width: 100%;
   }
   
+  /* Título principal */
   h1 {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
   }
   
+  /* Estilo dos rótulos */
   label {
     display: block;
     margin-bottom: 8px;
     color: #555;
   }
   
+  /* Estilo dos campos de texto */
   input[type="text"] {
     width: 100%;
     padding: 10px;
@@ -42,6 +48,7 @@
     margin-bottom: 15px;
   }
   
+  /* Botão de envio */
   button {
     width: 100%;
     padding: 10px;
@@ -53,10 +60,12 @@
     font-size: 16px;
   }
   
+  /* Efeito ao passar o mouse sobre o botão */
   button:hover {
     background-color: #0056b3;
   }
   
+  /* Caixa de resposta */
   .response-box {
     margin-top: 20px;
     padding: 10px;
@@ -67,6 +76,7 @@
     overflow: auto;
   }
   
+  /* Estilo para exibir o texto da resposta formatado */
   #responseText {
     white-space: pre-wrap;
     color: #333;
