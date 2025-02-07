@@ -1,37 +1,44 @@
 // Adiciona um evento ao botão para enviar a requisição
-// Quando o botão for clicado, executa a função async
-document.getElementById('sendRequest').addEventListener('click', async () => {
-    // Obtém o valor da chave da API fornecida pelo usuário
-    const apiKey = document.getElementById('apiKey').value.trim();
-    // Obtém o endpoint da API fornecido pelo usuário
-    const endpoint = document.getElementById('endpoint').value.trim();
-    // Referência para a caixa de resposta onde será exibido o retorno
-    const responseBox = document.getElementById('responseText');
-  
-    // Verifica se a chave da API e o endpoint foram preenchidos
-   
-    //caso queira que somente possa ser inserido o endpoint sem a chave da APU necessario excluir !apiKey abaixo
-    if (!apiKey || !endpoint) {
-      responseBox.textContent = 'Por favor, forneça tanto a chave da API quanto o endpoint.';
-      return; // Sai da função se os campos estiverem vazios
+document.getElementById('sendRequest').addEventListener('click', sendRequest);
+
+// Adiciona um evento ao campo de entrada para detectar a tecla Enter
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault(); // Impede o comportamento padrão do Enter (evita recarregar a página)
+    document.getElementById('sendRequest').click(); // Aciona o clique do botão
+  }
+});
+
+// Função assíncrona para enviar a requisição
+async function sendRequest() {
+  const apiKey = document.getElementById('apiKey').value.trim();
+  const endpoint = document.getElementById('endpoint').value.trim();
+  const responseBox = document.getElementById('responseText');
+
+
+  try {
+    const response = await fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Accept': 'application/json' // Garante que a API retorne JSON
+      }
+    });
+
+    console.log(response); // Log para depuração
+
+    if (!response.ok) {
+      throw new Error(`Erro ${response.status}: ${response.statusText}`);
     }
-  
-    try {
-      // Envia a requisição para o endpoint com a chave da API
-      const response = await fetch(endpoint, {
-        method: 'GET', // Método HTTP usado na requisição
-        headers: {
-          'Authorization': `Bearer ${apiKey}`, // Adiciona a chave da API no cabeçalho da requisição
-        }
-      });
-  
-      // Tenta converter a resposta para JSON
-      const data = await response.json();
-      // Exibe o JSON formatado na caixa de resposta
-      responseBox.textContent = JSON.stringify(data, null, 2);
-    } catch (error) {
-      // Exibe mensagens de erro caso a requisição falhe
-      responseBox.textContent = `Erro: ${error.message}`;
+
+    const contentType = response.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      throw new Error("A resposta não é JSON. Verifique a URL e a chave da API.");
     }
-  });
-  
+
+    const data = await response.json();
+    responseBox.textContent = JSON.stringify(data, null, 2);
+  } catch (error) {
+    responseBox.textContent = `Erro: ${error.message}`;
+  }
+}
